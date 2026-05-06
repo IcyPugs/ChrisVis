@@ -7,3 +7,4 @@ print("Ek hoop jy het dit geniet!")
 
 
 print("En jy wonder")
+print("Vader raak rustig")
