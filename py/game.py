@@ -23,7 +23,7 @@ CHARACTER_INTROS = {
     "Kres": None,
 }
 
-TYPEWRITER_DELAY = 0.03
+TYPEWRITER_DELAY = 0.006
 
 # ---------------------------------------------------------------------------
 # Screen management
