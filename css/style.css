@@ -1,0 +1,488 @@
+/* =========================================================
+   THE FORGOTTEN PATH — Main Stylesheet
+   ========================================================= */
+
+/* --- Variables & Reset --- */
+:root {
+  --color-bg:       #0c0a08;
+  --color-surface:  #14110e;
+  --color-border:   #3a2e22;
+  --color-gold:     #c9a84c;
+  --color-gold-dim: #7a5f2a;
+  --color-text:     #d4c5a9;
+  --color-text-dim: #7a6e5f;
+  --font-display:   'Cinzel', serif;
+  --font-body:      'IM Fell English', serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* --- Title Screen Layout --- */
+.screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 3rem 1.5rem;
+
+  /* Atmospheric dark background with radial glow */
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%, #1e160a 0%, transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.01) 2px,
+      rgba(255,255,255,0.01) 4px
+    ),
+    var(--color-bg);
+}
+
+/* Darkened edges for a cinematic feel */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Header / Title --- */
+.title-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  animation: fadeSlideDown 1.2s ease both;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+}
+
+.game-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  text-shadow:
+    0 0 30px rgba(201, 168, 76, 0.35),
+    0 2px 4px rgba(0,0,0,0.8);
+  line-height: 1.1;
+}
+
+.title-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.divider-line {
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold-dim));
+}
+
+.divider-line:last-child {
+  background: linear-gradient(to left, transparent, var(--color-gold-dim));
+}
+
+.divider-icon {
+  color: var(--color-gold-dim);
+  font-size: 1rem;
+}
+
+/* --- Start Button --- */
+.title-main {
+  position: relative;
+  z-index: 1;
+  animation: fadeSlideUp 1.2s 0.4s ease both;
+}
+
+.btn-start {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background: transparent;
+  border: 1px solid var(--color-gold-dim);
+  padding: 0.85rem 2.8rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+/* Corner accents on the button */
+.btn-start::before,
+.btn-start::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--color-gold);
+  border-style: solid;
+  transition: width 0.3s, height 0.3s;
+}
+
+.btn-start::before {
+  top: -1px; left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.btn-start::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.btn-start:hover {
+  color: #f0d98a;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.2), inset 0 0 20px rgba(201, 168, 76, 0.05);
+}
+
+.btn-start:hover::before,
+.btn-start:hover::after {
+  width: 14px;
+  height: 14px;
+}
+
+/* --- Footer --- */
+.title-footer {
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.05em;
+  animation: fadeSlideUp 1.2s 0.7s ease both;
+}
+
+/* --- Animations --- */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================================================
+   GAME SCREEN
+   ========================================================= */
+
+#game-screen {
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease both;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 20%, #1a120a 0%, transparent 70%),
+    var(--color-bg);
+}
+
+/* --- Top Bar --- */
+.game-topbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 1.5rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.topbar-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.topbar-status {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.05em;
+}
+
+/* --- Three-Column Layout --- */
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 0;
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - 41px);
+  overflow: hidden;
+}
+
+/* --- Panels (shared) --- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.panel:last-child {
+  border-right: none;
+  border-left: 1px solid var(--color-border);
+}
+
+.panel-heading {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255,255,255,0.015);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.panel-icon {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.panel-body::-webkit-scrollbar { width: 4px; }
+.panel-body::-webkit-scrollbar-track { background: transparent; }
+.panel-body::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.panel-empty {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  margin-top: 0.25rem;
+}
+
+/* --- Story Panel (center) --- */
+.panel-story {
+  border-right: 1px solid var(--color-border);
+  background: rgba(255,255,255,0.01);
+}
+
+.story-body {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--color-text);
+}
+
+.story-body p {
+  margin-bottom: 1.1rem;
+}
+
+.story-body p:last-child {
+  margin-bottom: 0;
+}
+/* =========================================================
+   TYPEWRITER CURSOR
+   ========================================================= */
+
+/* Blinking cursor appended while text is being typed */
+#intro-text::after {
+  content: '|';
+  color: var(--color-gold-dim);
+  animation: blink 0.8s step-end infinite;
+}
+
+#intro-text.typing-done::after {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* =========================================================
+   CHARACTER SELECTION BUTTONS
+   ========================================================= */
+
+.character-buttons {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.5s ease both;
+}
+
+.btn-character {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background: transparent;
+  border: 1px solid var(--color-gold-dim);
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s, border-color 0.25s, box-shadow 0.25s;
+  outline: none;
+}
+
+.btn-character::before,
+.btn-character::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: var(--color-gold);
+  border-style: solid;
+  transition: width 0.25s, height 0.25s;
+}
+
+.btn-character::before {
+  top: -1px; left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.btn-character::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.btn-character:hover {
+  color: #f0d98a;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 14px rgba(201, 168, 76, 0.18), inset 0 0 14px rgba(201, 168, 76, 0.04);
+}
+
+.btn-character:hover::before,
+.btn-character:hover::after {
+  width: 10px;
+  height: 10px;
+}
+
+/* =========================================================
+   CHARACTER INTRO PARAGRAPH
+   ========================================================= */
+
+.character-intro {
+  font-style: italic;
+  color: var(--color-text-dim);
+  border-left: 2px solid var(--color-gold-dim);
+  padding-left: 1rem;
+  margin-top: 1.2rem !important;
+  animation: fadeSlideUp 0.6s ease both;
+}
+
+/* =========================================================
+   QUEST ITEMS
+   ========================================================= */
+
+.quest-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(58, 46, 34, 0.5);
+  animation: fadeIn 0.4s ease both;
+  transition: opacity 0.5s ease;
+}
+
+.quest-item.fade-out {
+  opacity: 0;
+}
+
+.quest-checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-gold-dim);
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.quest-checkbox.checked {
+  background: var(--color-gold-dim);
+  border-color: var(--color-gold);
+}
+
+.quest-checkbox.checked::after {
+  content: '✓';
+  font-size: 9px;
+  color: var(--color-bg);
+  line-height: 1;
+}
+
+.quest-label {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}

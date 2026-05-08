@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Forgotten Path</title>
+
+    <!-- PyScript — runs Python directly in the browser -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <div class="screen" id="title-screen">
+      <div class="vignette"></div>
+
+      <header class="title-header">
+        <p class="subtitle">A journey into darkness awaits</p>
+        <h1 class="game-title">The Forgotten Path</h1>
+        <div class="title-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">⚔</span>
+          <span class="divider-line"></span>
+        </div>
+      </header>
+
+      <main class="title-main">
+        <button class="btn-start" id="btn-start">
+          <span class="btn-text">Start Adventure</span>
+        </button>
+      </main>
+
+      <footer class="title-footer">
+        <p>Use your wits. Trust no one. Survive.</p>
+      </footer>
+    </div>
+
+    <!-- =====================================================
+         GAME SCREEN — hidden until "Start Adventure" clicked
+         ===================================================== -->
+    <div class="screen hidden" id="game-screen">
+
+      <!-- Top bar -->
+      <div class="game-topbar">
+        <span class="topbar-title">The Forgotten Path</span>
+        <div class="topbar-divider"></div>
+        <span class="topbar-status" id="player-status">Wanderer  ·  Alive</span>
+      </div>
+
+      <!-- Three-column layout -->
+      <div class="game-layout">
+
+        <!-- LEFT — Quests -->
+        <aside class="panel panel-quests">
+          <h2 class="panel-heading">
+            <span class="panel-icon">📜</span> Quests
+          </h2>
+          <div class="panel-body" id="quest-list">
+            <!-- Quests injected by Python -->
+          </div>
+        </aside>
+
+        <!-- CENTER — Story -->
+        <main class="panel panel-story">
+          <h2 class="panel-heading">
+            <span class="panel-icon">🕯</span> The Story
+          </h2>
+          <div class="panel-body story-body" id="story-output">
+            <p id="intro-text"></p>
+            <p id="character-intro" class="hidden character-intro"></p>
+            <div id="character-buttons" class="hidden character-buttons">
+              <button class="btn-character" id="btn-gaven">Gaven</button>
+              <button class="btn-character" id="btn-amos">Amos</button>
+              <button class="btn-character" id="btn-kres">Kres</button>
+            </div>
+          </div>
+        </main>
+
+        <!-- RIGHT — Inventory -->
+        <aside class="panel panel-inventory">
+          <h2 class="panel-heading">
+            <span class="panel-icon">🎒</span> Inventory
+          </h2>
+          <div class="panel-body" id="inventory-list">
+            <p class="panel-empty">Your pack is empty.</p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- Load our Python game logic -->
+    <script type="py" src="py/game.py"></script>
+
+  </body>
+</html>
